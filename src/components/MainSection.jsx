@@ -1,7 +1,6 @@
 import React from 'react'
 import TaskGroup from './TaskGroup'
 
-import { ReactComponent as AddIcon } from '../assets/svg/plus.svg'
 import { ReactComponent as SearchIcon } from '../assets/svg/search.svg'
 import { ReactComponent as BellIcon } from '../assets/svg/bell.svg'
 

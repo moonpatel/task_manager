@@ -1,13 +1,22 @@
-import React from 'react';
-import './App.css';
-import MainSection from './components/MainSection';
-import SideBar from './components/SideBar';
+import React, { useContext } from "react";
+import Authentication from "./components/auth/Authentication";
+import MainSection from "./components/MainSection";
+import SideBar from "./components/SideBar";
+import AuthContext from "./context/auth-context";
 
 function App() {
+    const authCtx = useContext(AuthContext);
+
     return (
         <React.Fragment>
-            <SideBar />
-            <MainSection />
+            {authCtx.isLoggedIn ? (
+                <>
+                    <SideBar />
+                    <MainSection />
+                </>
+            ) : (
+                <Authentication />
+            )}
         </React.Fragment>
     );
 }
