@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Input = ({className,type,onChange,value}) => {
+const Input = ({ className, type, onChange, value }) => {
     const [value, setValue] = useState(value);
 
     return (

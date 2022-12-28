@@ -1,43 +1,61 @@
 import React, { useState, useContext } from 'react'
 import AuthContext from '../../context/auth-context';
+import useInput from '../../hooks/useInput';
 import Loader from '../UI/Loader';
 const API_KEY = "AIzaSyBnlosOl8gQRozpoQqgJwVYKY5bVOCMPJM"
 
 
 const SignIn = (props) => {
-    const [enteredEmail, setEnteredEmail] = useState("");
-    const [enteredPassword, setEnteredPassword] = useState("");
+    const email = useInput({});
+    const password = useInput({});
     const [isLoading, setIsLoading] = useState(false);
-    const authContext = useContext(AuthContext);
+    const authCtx = useContext(AuthContext);
 
-    const emailChangeHandler = event => {
-        setEnteredEmail(event.target.value);
-    }
-    const passwordChangeHandler = event => {
-        setEnteredPassword(event.target.value)
-    }
     const submitHandler = async (event) => {
         event.preventDefault();
         setIsLoading(true);
-        let data = await fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${API_KEY}`, {
-            method: "POST",
-            headers: {
-                'Content-type': 'application.json'
-            },
-            body: JSON.stringify({
-                email: enteredEmail,
-                password: enteredPassword,
-                returnSecureToken: true
-            })
-        })
 
-        data = await data.json();
-        console.log(data);
-        authContext.login(data);
+        try {
+
+            let data = await fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${API_KEY}`, {
+                method: "POST",
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: email.value,
+                    password: password.value,
+                    returnSecureToken: true
+                })
+            })
+
+            data = await data.json();
+            if (data?.error?.code >= 400) throw data;
+            authCtx.login(data);
+        } catch (e) {
+            console.log(e)
+            switch (e.error.message) {
+                case "INVALID_EMAIL":
+                    console.log("Email is invalid.");
+                    break;
+                case "EMAIL_NOT_FOUND":
+                    console.log("Incorrect email or password");
+                    break;
+                case "INVALID_PASSWORD":
+                    console.log("Incorrect email or password");
+                    break;
+                case "USER_DISABLED":
+                    console.log("Account is disabled by admin.");
+                    break;
+                default:
+                    console.log("Unknown error occured.");
+                    break;
+            }
+        }
 
         setIsLoading(false);
-        setEnteredEmail("");
-        setEnteredPassword("");
+        email.setValue("");
+        password.setValue("");
     }
 
     return (
@@ -47,11 +65,11 @@ const SignIn = (props) => {
                     <h1 className="text-center text-3xl my-2">Have an Account?</h1>
                     <div className='relative'>
                         {false ? <span className='absolute -bottom-5 left-6 text-sm text-red-800 font-semibold'>Error</span> : ""}
-                        <input className="p-3 pl-6 w-full rounded-full cursor-default outline-none bg-transparent bg-white bg-opacity-20 placeholder-gray-200" onChange={emailChangeHandler} value={enteredEmail} type="text" placeholder="Email" />
+                        <input className="p-3 pl-6 w-full rounded-full cursor-default outline-none bg-transparent bg-white bg-opacity-20 placeholder-gray-200" {...email} type="text" placeholder="Email" />
                     </div>
                     <div className='relative'>
                         {false ? <span className='absolute -bottom-5 left-6 text-sm text-red-800 font-semibold'>Error</span> : ""}
-                        <input className="p-3 pl-6 w-full rounded-full cursor-default outline-none bg-transparent bg-white bg-opacity-20 placeholder-gray-200" onChange={passwordChangeHandler} value={enteredPassword} type="password" placeholder="Password" />
+                        <input className="p-3 pl-6 w-full rounded-full cursor-default outline-none bg-transparent bg-white bg-opacity-20 placeholder-gray-200" {...password} type="password" placeholder="Password" />
                     </div>
                     <button className="w-36 mx-auto p-3 rounded-full bg-red-200 text-black font-semibold outline-none hover:bg-orange-200">{isLoading ? <Loader className="mx-auto w-5 animate-spin" /> : "SIGN IN"}</button>
                     <a href='./login' className="text-sm cursor-pointer">Forgot Password?</a>
