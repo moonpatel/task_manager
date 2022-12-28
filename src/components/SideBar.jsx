@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Option from './Option';
 
 import { ReactComponent as HomeIcon } from '../assets/svg/home.svg';
@@ -8,8 +8,10 @@ import { ReactComponent as FolderIcon } from '../assets/svg/folder.svg';
 import { ReactComponent as CalendarIcon } from '../assets/svg/calendar.svg';
 import { ReactComponent as SettingsIcon } from '../assets/svg/settings.svg';
 import { ReactComponent as LogoutIcon } from '../assets/svg/logout.svg';
+import AuthContext from '../context/auth-context';
 
 const SideBar = () => {
+    const authCtx = useContext(AuthContext);
     return (
         <React.Fragment>
             <div className="fixed w-1/5 h-screen py-5 border-r-2 border-gray-100">
@@ -25,7 +27,7 @@ const SideBar = () => {
                     <li className="my-48"></li>
 
                     <Option icon={<SettingsIcon />} label="Settings" />
-                    <Option icon={<LogoutIcon />} label="Logout" />
+                    <Option icon={<LogoutIcon />} onClick={authCtx.logout} label="Logout" />
                 </ul>
             </div>
             <div className="w-1/5 h-screen"></div>

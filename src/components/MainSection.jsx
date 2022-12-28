@@ -55,7 +55,7 @@ const MainSection = () => {
                 <div className="flex justify-end w-1/3 space-x-3">
                     <BellIcon />
 
-                    <div className="my-auto font-semibold px-5">Jane Doe</div>
+                    <div className="my-auto font-semibold px-5">{localStorage.getItem('email')}</div>
                     <div className="mr-6 relative">
                         <img className="h-12 rounded-full inline-block mr-6" src="../../assets/images/user.png" alt="" />
                     </div>

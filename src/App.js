@@ -6,6 +6,7 @@ import AuthContext from "./context/auth-context";
 
 function App() {
     const authCtx = useContext(AuthContext);
+    console.log(authCtx.token,authCtx.email);
 
     return (
         <React.Fragment>
@@ -15,7 +16,7 @@ function App() {
                     <MainSection />
                 </>
             ) : (
-                <Authentication />
+                <Authentication authCtx={authCtx} />
             )}
         </React.Fragment>
     );

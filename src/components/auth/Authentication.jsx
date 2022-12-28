@@ -6,7 +6,7 @@ const Authentication = (props) => {
     const [isSignUp, setIsSignUp] = useState(true);
 
     const togglePage = () => {
-        setIsSignUp(!isSignUp)
+        setIsSignUp((prevState) => !prevState);
     }
 
     return (
