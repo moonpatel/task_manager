@@ -7,7 +7,7 @@ const TaskContext = React.createContext([
     },
 ]);
 
-export const TaskContextProvider = (props) => {
+export const TasksContextProvider = (props) => {
     const [tasks, setTasks] = useState([{ title: "", body: "" }]);
 
     const addTask = (task) => {
