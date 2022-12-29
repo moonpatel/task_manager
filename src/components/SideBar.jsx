@@ -14,7 +14,7 @@ const SideBar = () => {
     const authCtx = useContext(AuthContext);
     return (
         <React.Fragment>
-            <div className="fixed w-1/5 h-screen py-5 border-r-2 border-gray-100">
+            <div className="fixed w-1/5 h-screen py-5 border-r-2 z-0 border-gray-100">
                 <h1 className="my-10 px-10 text-lg font-semibold">Task Manager</h1>
                 <ul className="my-12 text-gray-500">
 
