@@ -26,6 +26,14 @@ const TaskGroup = (props) => {
         setTasks((prevTasks) => [...prevTasks, task])
     }
 
+    const editTask = (task, index) => {
+        setTasks(prevTasks => {
+            prevTasks[index] = task;
+            console.log(prevTasks);
+            return prevTasks;
+        })
+    }
+
     const deleteTask = (index) => {
         setTasks((prevTasks) => prevTasks.filter((task, i) => i != index));
     }
@@ -44,7 +52,7 @@ const TaskGroup = (props) => {
 
                 <ul className="space-y-3">
                     {tasks.map((task, index) => {
-                        return <Task key={index} keyVal={index} title={task.title} body={task.body} deleteTask={deleteTask} />
+                        return <Task key={index} keyVal={index} title={task.title} body={task.body} editTask={editTask} deleteTask={deleteTask} />
                     })}
                 </ul>
             </div>
