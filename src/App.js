@@ -15,7 +15,7 @@ function App() {
                     <MainSection />
                 </>
             ) : (
-                <Authentication />
+                <Authentication isSignUp={true} />
             )}
         </React.Fragment>
     );

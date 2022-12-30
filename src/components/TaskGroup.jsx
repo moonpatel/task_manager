@@ -1,9 +1,9 @@
 import React from 'react'
-import Button from './Button'
-import Card from './Card'
+import Button from './UI/Button'
+import Card from './UI/Card'
 
-import {PlusIcon} from '@heroicons/react/24/outline'
-import {PaperClipIcon} from '@heroicons/react/24/outline'
+import { PlusIcon } from '@heroicons/react/24/outline'
+import { PaperClipIcon } from '@heroicons/react/24/outline'
 
 
 const TaskGroup = (props) => {
@@ -18,7 +18,7 @@ const TaskGroup = (props) => {
                 <Button className="w-full p-2 rounded-xl bg-[#e8f0f0]" content={<PlusIcon className='w-6 stroke-2 mx-auto stroke-[#53aa9a]' />} />
 
                 <ul className="space-y-3">
-                    {props.tasks.map((task,index) => {
+                    {props.tasks.map((task, index) => {
                         return <li key={index} className="p-5 bg-[#fefffe] rounded-2xl shadow-lg shadow-gray-100">
                             <div className="flex justify-between mb-3">
                                 <h1 className="text-xl font-semibold">{task.title}</h1>
