@@ -43,7 +43,7 @@ const Authentication = (props) => {
 
     const submitHandler = async (event) => {
         event.preventDefault();
-        const msg = validate();
+        let msg = validate();
         console.log(msg, errorMessage)
         if (errorMessage && errorMessage === msg) {
             return
@@ -71,7 +71,9 @@ const Authentication = (props) => {
             authCtx.login(data);
         } catch (e) {
             console.log(e)
-            authErrorHandler(e.error.message);
+            msg = authErrorHandler(e.error.message);
+            console.log(msg)
+            setErrorMessage(msg);
         }
 
         setIsLoading(false);
