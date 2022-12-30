@@ -52,7 +52,7 @@ const SignUp = (props) => {
 
     return (
         <div className="w-full space-y-3 divide-y-4 divide-black text-gray-200">
-            <div className="flex justify-center w-full h-screen bg-cover bg-blend-multiply bg-gray-400 bg-mountain">
+            <div className="flex justify-center w-full h-screen bg-cover bg-blend-multiply bg-gray-400 bg-sky">
                 <form className="flex flex-col space-y-6 justify-center align-middle w-96 h-fit mt-32 p-1" onSubmit={submitHandler} action="">
                     <h1 className="text-center text-3xl my-2">Don't have an account?</h1>
                     <div className='relative'>
