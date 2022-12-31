@@ -46,7 +46,7 @@ const TaskGroup = (props) => {
                     <div className="px-2 rounded-md font-semibold text-green-700 bg-green-200">{tasks.length}</div>
                 </div>
 
-                <Button className="w-full p-2 rounded-xl bg-[#e8f0f0]" onClick={() => setShowAddForm(!showAddForm)} content={<PlusIcon className='w-6 stroke-2 mx-auto stroke-[#53aa9a]' />} />
+                <Button className="w-full p-2 rounded-xl bg-emerald-100" onClick={() => setShowAddForm(!showAddForm)} content={<PlusIcon className='w-6 stroke-2 mx-auto stroke-[#53aa9a]' />} />
                 {showAddForm && <Modal width="640px"><AddTaskForm addTask={addTask} cancel={() => setShowAddForm(false)} /></Modal>}
 
 
