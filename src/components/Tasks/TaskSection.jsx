@@ -43,9 +43,6 @@ const TaskSection = () => {
     return (
         <>
             <section className="grid grid-cols-3 space-x-3">
-                {/* <TaskGroup title={allTasks[0].title} tasks={allTasks[0].tasks} />
-                <TaskGroup title={allTasks[1].title} tasks={allTasks[1].tasks} />
-                <TaskGroup title={allTasks[2].title} tasks={allTasks[2].tasks} /> */}
             {allTasks.map((taskgrp, index) => {
                 return <TaskGroup key={index} title={taskgrp.title} tasks={taskgrp.tasks} />
             })}

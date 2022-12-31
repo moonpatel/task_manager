@@ -7,17 +7,6 @@ import AddTaskForm from './AddTaskForm'
 
 import { PlusIcon } from '@heroicons/react/24/outline'
 
-const dummy_tasks = [
-    {
-        title: "Design",
-        body: "We need 2 different concepts for a software page in our program. I've attached 2 concepts that will give you an idea to reproduce but with a new look and feel. We'd like to keep the colors similar but you can add different colors."
-    },
-    {
-        title: "Development",
-        body: "Secured web platform that will integrate and pull from several other web apps to which I subscribe and have the api access to."
-    }
-]
-
 const TaskGroup = (props) => {
     const [showAddForm, setShowAddForm] = useState(false);
     const [tasks, setTasks] = useState(props.tasks);
@@ -40,13 +29,13 @@ const TaskGroup = (props) => {
 
     return (
         <Card>
-            <div className="col-span-1 p-3 space-y-3 rounded-2xl bg-[#f6fafa]">
+            <div className="col-span-1 p-3 space-y-3 rounded-2xl bg-[#f6fafa] dark:bg-gray-800">
                 <div className="flex justify-between">
-                    <h1 className="text-lg font-semibold">{props.title}</h1>
-                    <div className="px-2 rounded-md font-semibold text-green-700 bg-green-200">{tasks.length}</div>
+                    <h1 className="text-lg font-semibold dark:text-gray-500">{props.title}</h1>
+                    <div className="px-2 rounded-md font-semibold text-green-700 bg-green-200 dark:bg-green-600 dark:text-green-200">{tasks.length}</div>
                 </div>
 
-                <Button className="w-full p-2 rounded-xl bg-emerald-100" onClick={() => setShowAddForm(!showAddForm)} content={<PlusIcon className='w-6 stroke-2 mx-auto stroke-[#53aa9a]' />} />
+                <Button className="w-full p-2 rounded-xl bg-emerald-100 dark:bg-green-600" onClick={() => setShowAddForm((prev) => !prev)} content={<PlusIcon className='w-6 stroke-2 mx-auto stroke-[#53aa9a] dark:stroke-green-200' />} />
                 {showAddForm && <Modal width="640px"><AddTaskForm addTask={addTask} cancel={() => setShowAddForm(false)} /></Modal>}
 
 
