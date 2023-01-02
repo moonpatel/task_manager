@@ -1,10 +1,12 @@
-import React from 'react'
-import TaskSection from './Tasks/TaskSection'
+import React, { useContext } from 'react'
+import TaskSection from '../components/Tasks/TaskSection'
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 import { ReactComponent as BellIcon } from '../assets/svg/bell.svg'
-import { toggleTheme } from '../utilities/setTheme'
-
+import { setTheme } from '../utilities/setTheme'
+import ThemeContext from '../context/theme-context'
+    
 const MainSection = () => {
+    const themeCtx = useContext(ThemeContext);
     return (
         <div className="w-4/5 h-screen px-10 dark:bg-dark-gray">
             {/* <!-- navbar --> */}
@@ -19,7 +21,7 @@ const MainSection = () => {
                     />
                 </div>
                 <div className="flex justify-end w-1/3 space-x-3">
-                    <BellIcon className='w-6 dark:stroke-gray-500' />
+                    <BellIcon className='w-6 dark:stroke-gray-500' onClick={() => themeCtx.toggleTheme()} />
 
                     <div className="my-auto font-semibold px-5 dark:text-gray-500">{localStorage.getItem('email')}</div>
                     <div className="mr-6 relative">
