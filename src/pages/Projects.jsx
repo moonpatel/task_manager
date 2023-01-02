@@ -1,8 +1,7 @@
 import React from 'react'
-import TaskSection from './Tasks/TaskSection'
+import TaskSection from '../components/Tasks/TaskSection'
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 import { ReactComponent as BellIcon } from '../assets/svg/bell.svg'
-import { toggleTheme } from '../utilities/setTheme'
 
 const MainSection = () => {
     return (
