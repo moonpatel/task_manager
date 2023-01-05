@@ -9,15 +9,14 @@ import { ReactComponent as CalendarIcon } from '../assets/svg/calendar.svg';
 import { ReactComponent as SettingsIcon } from '../assets/svg/settings.svg';
 import { ReactComponent as LogoutIcon } from '../assets/svg/logout.svg';
 import AuthContext from '../context/auth-context';
-import { NavLink } from 'react-router-dom';
 
 const SideBar = () => {
     const authCtx = useContext(AuthContext);
     return (
         <React.Fragment>
-            <div className="fixed w-1/5 h-screen py-5 border-r-2 border-gray-100 dark:border-gray-500 dark:bg-dark-gray">
-                <h1 className="my-10 px-10 text-lg font-semibold dark:text-gray-500">Task Manager</h1>
-                <ul className="my-12 text-gray-500 dark:text-gray-400">
+            <div className="fixed w-1/5 h-screen py-5 dark:bg-dark-bgsec">
+                <h1 className="my-10 px-10 text-lg font-semibold dark:text-white">Task Manager</h1>
+                <ul className="my-12 text-gray-500 dark:text-white text-opacity-50">
 
                     <SideBarLink to={'/home'} icon={<HomeIcon />} label="Overview" />
                     <SideBarLink to={'/stats'} icon={<StatsIcon />} label="Stats" />
