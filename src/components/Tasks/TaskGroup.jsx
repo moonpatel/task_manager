@@ -29,13 +29,13 @@ const TaskGroup = (props) => {
 
     return (
         <Card>
-            <div className="col-span-1 p-3 space-y-3 rounded-2xl bg-[#f6fafa] dark:bg-gray-800">
+            <div className="col-span-1 p-3 space-y-3 rounded-2xl bg-[#f6fafa] dark:bg-dark-bg-1">
                 <div className="flex justify-between">
-                    <h1 className="text-lg font-semibold dark:text-gray-500">{props.title}</h1>
-                    <div className="px-2 rounded-md font-semibold text-green-700 bg-green-200 dark:bg-green-600 dark:text-green-200">{tasks.length}</div>
+                    <h1 className="text-lg font-semibold dark:text-dark-on-background">{props.title}</h1>
+                    <div className="px-2 rounded-md font-semibold text-green-700 bg-green-200 dark:bg-dark-primary-900 dark:text-dark-background">{tasks.length}</div>
                 </div>
 
-                <Button className="w-full p-2 rounded-xl bg-emerald-100 dark:bg-green-600" onClick={() => setShowAddForm((prev) => !prev)} content={<PlusIcon className='w-6 stroke-2 mx-auto stroke-[#53aa9a] dark:stroke-green-200' />} />
+                <Button className="w-full p-2 rounded-xl bg-emerald-100 dark:bg-dark-primary-900 dark:hover:bg-dark-primary-900/70" onClick={() => setShowAddForm((prev) => !prev)} content={<PlusIcon className='w-6 stroke-2 mx-auto stroke-[#53aa9a] dark:stroke-dark-on-primary' />} />
                 {showAddForm && <Modal width="640px"><AddTaskForm addTask={addTask} cancel={() => setShowAddForm(false)} /></Modal>}
 
 
