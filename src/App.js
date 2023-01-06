@@ -1,8 +1,6 @@
-import React, { useContext } from "react";
+import React from "react";
 import Authentication from "./components/auth/Authentication";
 import Projects from "./pages/Projects";
-
-import AuthContext from "./context/auth-context";
 
 import { Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
@@ -13,7 +11,6 @@ import Stats from "./pages/Stats";
 import Calendar from "./pages/Calendar";
 
 function App() {
-    const authCtx = useContext(AuthContext);
 
     return (
         <Routes>
