@@ -3,10 +3,10 @@ import { EllipsisHorizontalIcon } from '@heroicons/react/24/outline'
 
 const Chats = () => {
     return (
-        <div className='grid grid-cols-7 pt-20 h-full divide-x dark:text-dark-on-background dark:bg-dark-background'>
+        <div className='grid grid-cols-7 divide-x dark:text-dark-on-background dark:bg-dark-background'>
             {/* contacts-bar */}
             <div className='col-span-2'>
-                <header className='flex my-auto justify-between pl-2 h-[70px] w-full border-b'>
+                <header className='flex my-auto justify-between pl-3 h-[70px] border-b'>
                     <div className='my-auto'>
                         <h1 className='text-xl font-semibold'>Messages</h1>
                         <span className='text-sm font-semibold text-black/50'>Direct and team messages</span>
@@ -15,7 +15,7 @@ const Chats = () => {
                     {/* <div className='my-auto px-5 text-3xl'>...</div> */}
                 </header>
                 {/* <button className='w-full rounded-md py-2 bg-dark-primary-800'>Create Conversation</button> */}
-                <ul className='pl-2 space-y-1 mr-1 h-[80vh] overflow-y-scroll bg-red-200'>
+                <ul className='pl-2 space-y-1 mr-1 h-[80vh] overflow-y-scroll'>
                     <li className='flex h-16'>
                         <div className='w-10 bg-black h-10 rounded-full p-3 mx-3 my-auto'>l</div>
                         <div className='my-auto'>
