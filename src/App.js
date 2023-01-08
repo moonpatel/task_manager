@@ -13,22 +13,7 @@ import Profile from "./pages/Profile";
 import Logout from "./components/Logout";
 import Modal from "./components/UI/Modal";
 import AuthContext from "./context/auth-context";
-import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
-
-const firebaseConfig = {
-    apiKey: "AIzaSyBnlosOl8gQRozpoQqgJwVYKY5bVOCMPJM",
-    authDomain: "task-manager-43770.firebaseapp.com",
-    databaseURL: "https://task-manager-43770-default-rtdb.firebaseio.com",
-    projectId: "task-manager-43770",
-    storageBucket: "task-manager-43770.appspot.com",
-    messagingSenderId: "349292358097",
-    appId: "1:349292358097:web:7e0b4f20632477ffd7d8f0",
-    measurementId: "G-P6K08T64NV",
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+// import { getFirestore } from "firebase/firestore";
 
 function App() {
     const authCtx = useContext(AuthContext);
