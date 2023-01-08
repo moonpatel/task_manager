@@ -9,7 +9,7 @@ const API_KEY = "AIzaSyBnlosOl8gQRozpoQqgJwVYKY5bVOCMPJM"
 const signUpURL = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${API_KEY}`
 const signInURL = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${API_KEY}`
 
-const inputStyle = "p-3 pl-6 w-full rounded-full cursor-default outline-none bg-transparent bg-white bg-opacity-25 text-gray-100 placeholder-gray-400"
+const inputStyle = "p-3 pl-6 w-full rounded-full outline-none bg-opacity-25 bg-white text-gray-100 placeholder-gray-400"
 
 const Authentication = (props) => {
     const [isSignUp, setIsSignUp] = useState(props.isSignUp ? props.isSignUp : true);

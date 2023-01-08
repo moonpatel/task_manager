@@ -36,7 +36,7 @@ const TaskGroup = (props) => {
                 </div>
 
                 <Button className="w-full p-2 rounded-xl bg-emerald-100 dark:bg-dark-primary-900 dark:hover:bg-dark-primary-900/70" onClick={() => setShowAddForm((prev) => !prev)} content={<PlusIcon className='w-6 stroke-2 mx-auto stroke-[#53aa9a] dark:stroke-dark-on-primary' />} />
-                {showAddForm && <Modal width="640px"><AddTaskForm addTask={addTask} cancel={() => setShowAddForm(false)} /></Modal>}
+                {showAddForm && <Modal width="480px"><AddTaskForm addTask={addTask} cancel={() => setShowAddForm(false)} /></Modal>}
 
 
                 <ul className="space-y-3">

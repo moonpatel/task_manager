@@ -24,7 +24,7 @@ const Task = ({ title, body, keyVal, editTask, deleteTask }) => {
             <p className="space-y-2 text-gray-600 text-sm dark:text-dark-on-background/50">
                 {body}
             </p>
-            {showEditForm && <Modal width="640px"><EditTaskForm index={keyVal} title={title} details={body} editTask={editTask} cancel={() => setShowEditForm(false)} /></Modal>}
+            {showEditForm && <Modal width="480px"><EditTaskForm index={keyVal} title={title} details={body} editTask={editTask} cancel={() => setShowEditForm(false)} /></Modal>}
             <div className="-space-x-2 mt-4">
                 <div
                     className="inline-flex overflow-hidden relative justify-center items-center w-8 h-8 bg-red-400 rounded-full border-2 border-white dark:border-dark-background"

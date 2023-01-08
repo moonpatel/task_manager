@@ -18,22 +18,34 @@ const EditTaskForm = (props) => {
         const task = {
             title, body: details
         }
-        props.editTask(task,props.index);
+        props.editTask(task, props.index);
         props.cancel();
     }
 
     return (
         <form onSubmit={editTaskHandler}>
-            <div className={`mt-32 p-6 space-y-5 rounded-t-lg bg-white`}>
-                <h1 className='mb-3 text-2xl text-center font-semibold'>Edit Task</h1>
-                <div className='flex space-x-5'>
-                    <label className='my-auto w-14 text-lg text-gray-600 font-semibold'>Title</label>
-                    <input type="text" value={title} onChange={titleChangeHandler} className='p-2 px-3 w-full outline-none border rounded-lg border-gray-300' />
+            <div className={`mt-20 px-6 py-3 space-y-5 rounded-t-lg bg-white grid grid-cols-2 space-x-2 text-black/75`}>
+                <h1 className=' text-2xl p-3 border-b col-span-2 font-semibold'>Create Task</h1>
+                <div className='col-span-2'>
+                    <label className=''>Task Name</label>
+                    <input type="text" value={title} onChange={titleChangeHandler} className='p-2 px-3 w-full outline-none border rounded-md border-gray-300' />
                 </div>
-                <div className='flex space-x-3'>
-                    <label className='mt-1 w-16 text-lg text-gray-600 font-semibold'>Details</label>
-                    <textarea className='p-2 px-3 w-full outline-none border rounded-lg border-gray-300' value={details} rows="5" onChange={detailsChangeHandler}></textarea>
+                <div className='col-span-2'>
+                    <label className=''>Task Details</label>
+                    <textarea className='p-2 px-3 w-full outline-none border rounded-lg border-gray-300' value={details} rows="3" onChange={detailsChangeHandler}></textarea>
                 </div>
+                {/* <div className='col-span-1'>
+                    <label className=''>Due Date</label>
+                    <input type="date" value={""} onChange={titleChangeHandler} className='p-2 px-3 w-full outline-none border rounded-md border-gray-300' />
+                </div>
+                <div className='col-span-1'>
+                    <label className=''>Due Time</label>
+                    <input type="time" value={"00:00"} onChange={titleChangeHandler} className='p-2 px-3 w-full outline-none border rounded-md border-gray-300' />
+                </div>
+                <div className='col-span-2'>
+                    <label className=''>Task Tags</label>
+                    <input type="text" value={""} onChange={titleChangeHandler} className='p-2 px-3 w-full outline-none border rounded-md border-gray-300' />
+                </div> */}
             </div>
             <div className='mx-auto py-3 pr-3 rounded-b-lg flex space-x-3 justify-end bg-gray-200' style={{ width: props.width }}>
                 <Button className={`p-2 px-3 font-semibold text-gray-700`} onClick={props.cancel} content={"Cancel"} />
