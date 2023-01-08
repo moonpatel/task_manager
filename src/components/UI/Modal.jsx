@@ -1,19 +1,14 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import ReactDOM from 'react-dom'
 
-export const BackDrop = (props) => {
+export const BackDrop = () => {
     return (
-        <div className='fixed top-0 left-0 w-full h-screen z-20 bg-black opacity-75'>
+        <div className='fixed top-0 left-0 w-full h-screen z-20 bg-black/60 backdrop-blur-sm'>
         </div>
     )
 }
 
 const Modal = (props) => {
-    // useEffect(() => {
-    //     document.querySelector('#backdrop-root').style.display = "block"
-    //     document.querySelector('#modal-root').style.display = "block"
-    // }, [])
-
     return (
         <>
             {ReactDOM.createPortal(<BackDrop />, document.querySelector('#backdrop'))}

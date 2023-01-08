@@ -1,12 +1,15 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import ThemeContext from '../context/theme-context'
-import { MagnifyingGlassIcon, BellIcon } from '@heroicons/react/24/outline'
+import { NavLink } from 'react-router-dom'
+import DropDown from './UI/DropDown'
+import { MagnifyingGlassIcon, BellIcon, UserCircleIcon, QuestionMarkCircleIcon } from '@heroicons/react/24/outline'
 
 const Navbar = () => {
-    const themeCtx = useContext(ThemeContext)
+    const themeCtx = useContext(ThemeContext);
+    const [open, setOpen] = useState(false);
 
     return (
-        <nav className="flex h-[10vh] min-h-[80px] px-12 space-x-3 w-4/5 border-b dark:bg-dark-background fixed bg-white opacity-100 z-10 top-0">
+        <nav className="flex h-[10vh] min-h-[80px] px-12 space-x-3 w-4/5 border-b dark:border-b-dark-bg-3 dark:bg-dark-background fixed bg-white opacity-100 z-10 top-0">
             {/* <!-- search icon --> */}
             <div className="flex my-auto rounded-xl bg-gray-50 w-2/3 dark:bg-dark-bg-1 dark:text-dark-on-background/75">
                 <MagnifyingGlassIcon className="w-6 mx-2 my-auto bg-transparent stroke-gray-400 dark:stroke-gray-500" />
@@ -20,8 +23,26 @@ const Navbar = () => {
                 <BellIcon className='w-6 dark:stroke-gray-500' onClick={() => themeCtx.toggleTheme()} />
 
                 <div className="my-auto font-semibold px-5 dark:text-gray-500">{localStorage.getItem('email')}</div>
-                <div className="mr-6 relative">
-                    <img className="h-12 rounded-full inline-block mr-6" src="../../assets/images/user.png" alt="" />
+                <div className="mr-6 my-auto relative" onClick={() => setOpen(!open)}>
+                    <img className="my-auto rounded-full w-12 h-12" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaRfD8-JpgZJhpTMUVMj7Ka9ohgnAIQFIjxuWQBkNO&s" alt="" />
+                    <DropDown open={open}>
+                        <NavLink to={"/profile"} className="flex my-2 space-x-4 hover:text-dark-primary-900 group">
+                            <UserCircleIcon className='w-6 group-hover:stroke-dark-primary-900' />
+                            <div className='my-auto'>My Profile</div>
+                        </NavLink>
+                        <NavLink to={"/help"} className="flex my-2 space-x-4 hover:text-dark-primary-900">
+                            <QuestionMarkCircleIcon className='w-6' />
+                            <div className='my-auto'>Help & Support</div>
+                        </NavLink>
+                        <NavLink to={"/invite"} className="flex my-2 space-x-4 hover:text-dark-primary-900">
+                            <UserCircleIcon className='w-6' />
+                            <div className='my-auto'>Invite Friends</div>
+                        </NavLink>
+                        <NavLink to={"/logout"} className="flex my-2 space-x-4 hover:text-dark-primary-900">
+                            <UserCircleIcon className='w-6' />
+                            <div className='my-auto'>Logout</div>
+                        </NavLink>
+                    </DropDown>
                 </div>
             </div>
         </nav>
