@@ -4,6 +4,7 @@ import AuthContext from '../../context/auth-context'
 import Loader from '../UI/Loader'
 import Button from '../UI/Button'
 import authErrorHandler from '../../utilities/authErrorHandler'
+// import useFirebase from '../../hooks/useFirebase'
 
 const API_KEY = "AIzaSyBnlosOl8gQRozpoQqgJwVYKY5bVOCMPJM"
 const signUpURL = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${API_KEY}`
@@ -12,6 +13,7 @@ const signInURL = `https://identitytoolkit.googleapis.com/v1/accounts:signInWith
 const inputStyle = "p-3 pl-6 w-full rounded-full outline-none bg-opacity-25 bg-white text-gray-100 placeholder-gray-400"
 
 const Authentication = (props) => {
+    // const firebaseApp = useFirebase();
     const [isSignUp, setIsSignUp] = useState(props.isSignUp ? props.isSignUp : true);
     const [isLoading, setIsLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
@@ -20,7 +22,7 @@ const Authentication = (props) => {
     const fname = useInput({});
     const lname = useInput({});
     const username = useInput({});
-    const authCtx = useContext(AuthContext)
+    const authCtx = useContext(AuthContext);
 
     const toggleForm = () => {
         setErrorMessage("");
@@ -54,21 +56,12 @@ const Authentication = (props) => {
         }
         setIsLoading(true)
         try {
-            let data = await fetch(isSignUp ? signUpURL : signInURL, {
-                method: "POST",
-                headers: {
-                    'Content-type': 'application/json'
-                },
-                body: JSON.stringify({
-                    email: email.value,
-                    password: password.value,
-                    returnSecureToken: true
-                })
-            })
-
-            data = await data.json();
-            if (data?.error?.code >= 400) throw data;
-            authCtx.login(data);
+            let data = { email: email.value, password: password.value };
+            if (isSignUp) {
+                await authCtx.signup('EMAIL', data);
+            } else {
+                await authCtx.login('EMAIL', data);
+            }
         } catch (e) {
             console.log(e)
             msg = authErrorHandler(e.error.message);
@@ -100,7 +93,10 @@ const Authentication = (props) => {
                 {isSignUp && <a href='./login' className="text-sm cursor-pointer">Forgot Password?</a>}
                 <span>{isSignUp ? "Don't have an account?" : "Already have an account?"} <span className='cursor-pointer font-bold text-green-400 hover:underline' onClick={toggleForm}>{isSignUp ? "Sign In" : "Sign Up"}</span></span>
             </form>
-        </div>
+            <button onClick={() => authCtx.login('GOOGLE')}>Google</button>
+            <button onClick={() => authCtx.login('GITHUB')}>GitHub</button>
+            <button onClick={() => authCtx.login('TWITTER')}>Twitter</button>
+        </div >
     )
 }
 
