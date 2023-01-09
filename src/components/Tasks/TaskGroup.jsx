@@ -28,24 +28,22 @@ const TaskGroup = (props) => {
     }
 
     return (
-        <Card>
-            <div className="col-span-1 p-3 space-y-3 rounded-2xl bg-[#f6fafa] dark:bg-dark-bg-1">
-                <div className="flex justify-between">
-                    <h1 className="text-lg font-semibold dark:text-dark-on-background">{props.title}</h1>
-                    <div className="px-2 rounded-md font-semibold text-green-700 bg-green-200 dark:bg-dark-primary-900 dark:text-dark-background">{tasks.length}</div>
-                </div>
-
-                <Button className="w-full p-2 rounded-xl bg-emerald-100 dark:bg-dark-primary-900 dark:hover:bg-dark-primary-900/70" onClick={() => setShowAddForm((prev) => !prev)} content={<PlusIcon className='w-6 stroke-2 mx-auto stroke-[#53aa9a] dark:stroke-dark-on-primary' />} />
-                {showAddForm && <Modal width="480px"><AddTaskForm addTask={addTask} cancel={() => setShowAddForm(false)} /></Modal>}
-
-
-                <ul className="space-y-3">
-                    {tasks.map((task, index) => {
-                        return <Task key={index} keyVal={index} title={task.title} body={task.body} editTask={editTask} deleteTask={deleteTask} />
-                    })}
-                </ul>
+        <div className="col-span-1 p-3 space-y-3 rounded-2xl bg-gray-100 dark:bg-dark-bg-1">
+            <div className="flex justify-between">
+                <h1 className="text-lg font-semibold dark:text-dark-on-background">{props.title}</h1>
+                <div className="px-2 rounded-md font-semibold text-green-700 bg-green-200 dark:bg-dark-primary-900 dark:text-dark-background">{tasks.length}</div>
             </div>
-        </Card>
+
+            <Button className="w-full p-2 rounded-xl gradient-3 hover:gradient-4 dark:bg-dark-primary-900 dark:hover:gradient-2" onClick={() => setShowAddForm((prev) => !prev)} content={<PlusIcon className='w-6 stroke-2 mx-auto stroke-white' />} />
+            {showAddForm && <Modal width="480px"><AddTaskForm addTask={addTask} cancel={() => setShowAddForm(false)} /></Modal>}
+
+
+            <ul className="space-y-3">
+                {tasks.map((task, index) => {
+                    return <Task key={index} keyVal={index} title={task.title} body={task.body} editTask={editTask} deleteTask={deleteTask} />
+                })}
+            </ul>
+        </div>
     )
 }
 

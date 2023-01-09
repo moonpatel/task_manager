@@ -2,8 +2,8 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 
 const SideBarLink = ({ icon, label, to }) => {
-    const activeStyle = "w-full h-full flex pl-10 bg-green-100 dark:bg-dark-primary-900 dark:text-dark-on-primary";
-    const inActiveStyle = "w-full h-full flex pl-10 hover:bg-gray-200 dark:hover:bg-white/10 dark:hover:text-dark-primary-900 dark:text-white/50";
+    const activeStyle = "w-full h-full flex pl-10 text-white bg-dark-background dark:bg-dark-primary-900 dark:text-dark-on-primary";
+    const inActiveStyle = "w-full h-full flex pl-10 hover:bg-dark-primary-500 dark:hover:bg-white/10 dark:hover:text-dark-primary-900 dark:text-white/50";
     return (
         <li className={`h-12`}>
             <NavLink to={to} className={({ isActive }) => isActive ? activeStyle : inActiveStyle}>
