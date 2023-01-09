@@ -14,8 +14,9 @@ import {
 import { addDoc, collection, getDocs, getFirestore, query, where } from "firebase/firestore";
 
 const AuthContext = React.createContext({
-    token: null,
+    app: null,
     isLoggedIn: false,
+    user: null,
     signup: async () => {},
     login: async () => {},
     logout: async () => {},

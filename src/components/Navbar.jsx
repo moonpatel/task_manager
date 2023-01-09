@@ -3,6 +3,7 @@ import ThemeContext from '../context/theme-context'
 import { NavLink } from 'react-router-dom'
 import DropDown from './UI/DropDown'
 import { MagnifyingGlassIcon, BellIcon, UserCircleIcon, QuestionMarkCircleIcon } from '@heroicons/react/24/outline'
+import Avatar from './Avatar'
 
 const Navbar = () => {
     const themeCtx = useContext(ThemeContext);
@@ -24,8 +25,7 @@ const Navbar = () => {
 
                 <div className="my-auto font-semibold px-5 dark:text-gray-500">{localStorage.getItem('email')}</div>
                 <div className="mr-6 my-auto relative" onClick={() => setOpen(!open)}>
-                    <div className='w-12 h-12 rounded-full gradient-3 dark:gradient-2'>
-                    </div>
+                    <Avatar width="50" />
                     <DropDown open={open}>
                         <NavLink to={"/profile"} className="flex my-2 space-x-4 hover:text-dark-primary-900 group">
                             <UserCircleIcon className='w-6 group-hover:stroke-dark-primary-900' />
