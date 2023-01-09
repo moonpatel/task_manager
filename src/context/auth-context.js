@@ -1,18 +1,17 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
+import { initializeApp } from "@firebase/app";
 import {
     browserLocalPersistence,
     createUserWithEmailAndPassword,
     getAuth,
-    getRedirectResult,
     GithubAuthProvider,
     GoogleAuthProvider,
     setPersistence,
     signInWithEmailAndPassword,
     signInWithPopup,
-    signInWithRedirect,
     TwitterAuthProvider,
 } from "firebase/auth";
-import { initializeApp } from "@firebase/app";
+import { addDoc, collection, getDocs, getFirestore, query, where } from "firebase/firestore";
 
 const AuthContext = React.createContext({
     token: null,
@@ -34,6 +33,7 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+const db = getFirestore();
 const auth = getAuth(app);
 
 export const AuthContextProvider = (props) => {
@@ -43,9 +43,11 @@ export const AuthContextProvider = (props) => {
     const [isLoggedIn, setIsLoggedIn] = useState(user ? true : false);
 
     const login = async (method = "EMAIL", data) => {
-        let user = "";
         let provider = null;
         let result = null;
+        let u = {};
+
+        // use authentication method based on method parameter
         switch (method) {
             case "EMAIL":
                 await setPersistence(auth, browserLocalPersistence);
@@ -58,17 +60,38 @@ export const AuthContextProvider = (props) => {
             case "GITHUB":
                 provider = new GithubAuthProvider();
                 result = await signInWithPopup(auth, provider);
-                user = { displayName: result.user.displayName, email: result.user.email };
                 break;
             case "TWITTER":
                 provider = new TwitterAuthProvider();
                 result = await signInWithPopup(auth, provider);
                 break;
+            default:
+                break;
         }
-        user = { displayName: result.user.displayName, email: result.user.email };
-        setUser(user);
+        // user object stored in localStorage
+        u = { displayName: result.user.displayName, email: result.user.email, uid: result.user.uid };
+        try {
+            console.log(result.user.uid);
+            const usersRef = collection(db, "users"); // reference to users collection
+            const q = query(usersRef, where("uid", "==", result.user.uid)); // create a query object
+            const querySS = await getDocs(q); // get querySnapShot based on the query object
+
+            if (querySS.empty) {
+                // create user document if user does not exists
+                const docRef = await addDoc(usersRef, u);
+                console.log("Document created with reference", docRef.id);
+            } else {
+                // the user already exists, get users data
+                console.log("User already exists");
+                u = querySS.docs[0].data;
+            }
+        } catch (err) {
+            console.log(err);
+            return;
+        }
+        setUser(u);
         setIsLoggedIn(true);
-        localStorage.setItem("user", JSON.stringify(user));
+        localStorage.setItem("user", JSON.stringify(u));
         localStorage.setItem("isLoggedIn", true);
     };
 
@@ -91,7 +114,9 @@ export const AuthContextProvider = (props) => {
     };
 
     return (
-        <AuthContext.Provider value={{ app, isLoggedIn, signup, login, logout }}>{props.children}</AuthContext.Provider>
+        <AuthContext.Provider value={{ app, isLoggedIn, user, signup, login, logout }}>
+            {props.children}
+        </AuthContext.Provider>
     );
 };
 
