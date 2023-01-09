@@ -1,7 +1,5 @@
 import React from 'react'
-import Logout from '../components/Logout'
 import TaskSection from '../components/Tasks/TaskSection'
-import Modal from '../components/UI/Modal'
 
 const Projects = () => {
     return (
@@ -14,9 +12,6 @@ const Projects = () => {
 
                 <TaskSection />
             </main>
-            {/* <Modal width={"360px"}>
-                <Logout />
-            </Modal> */}
         </div>
 
     )
