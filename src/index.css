@@ -10,6 +10,9 @@
         @apply bg-gradient-to-br from-emerald-600 to-cyan-900;
     }
     .gradient-3 {
+        @apply bg-gradient-to-br from-emerald-400 to-cyan-700
+    }
+    .gradient-4 {
         @apply bg-gradient-to-br from-emerald-200 to-cyan-500
     }
 }

@@ -1,15 +1,18 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import Avatar from '../components/Avatar';
+import AuthContext from '../context/auth-context'
 
 const Profile = () => {
+    const { displayName, email } = useContext(AuthContext).user;
     return (
         <div className='mx-auto mt-10 w-[720px] space-y-10'>
             <div className='flex items-center space-x-5'>
-                <img className='w-[100px] rounded-full' src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/240px-Circle-icons-profile.svg.png" />
+                <Avatar name={displayName} width="100" />
                 <div className='flex-1'>
-                    <div className='text-3xl font-semibold'>Name</div>
-                    <div className=' text-black/50 dark:text-dark-on-background/50'>username</div>
+                    <div className='text-3xl font-semibold'>{displayName}</div>
+                    <div className=' text-black/50 dark:text-dark-on-background/50'>{email}</div>
                 </div>
-                <button className='dark:bg-dark-primary-900 p-2 rounded-lg px-3 font-semibold dark:text-dark-background'>Edit Profile</button>
+                <button className='dark:gradient-3 p-2 rounded-lg px-3 font-semibold dark:text-dark-background'>Edit Profile</button>
             </div>
             <div>
                 <h1 className='text-2xl font-semibold my-2'>About</h1>
