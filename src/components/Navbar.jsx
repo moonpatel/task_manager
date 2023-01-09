@@ -24,7 +24,8 @@ const Navbar = () => {
 
                 <div className="my-auto font-semibold px-5 dark:text-gray-500">{localStorage.getItem('email')}</div>
                 <div className="mr-6 my-auto relative" onClick={() => setOpen(!open)}>
-                    <img className="my-auto rounded-full w-12 h-12" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaRfD8-JpgZJhpTMUVMj7Ka9ohgnAIQFIjxuWQBkNO&s" alt="" />
+                    <div className='w-12 h-12 rounded-full gradient-3 dark:gradient-2'>
+                    </div>
                     <DropDown open={open}>
                         <NavLink to={"/profile"} className="flex my-2 space-x-4 hover:text-dark-primary-900 group">
                             <UserCircleIcon className='w-6 group-hover:stroke-dark-primary-900' />

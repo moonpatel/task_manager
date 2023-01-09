@@ -4,16 +4,14 @@ import AuthContext from '../../context/auth-context'
 import Loader from '../UI/Loader'
 import Button from '../UI/Button'
 import authErrorHandler from '../../utilities/authErrorHandler'
-// import useFirebase from '../../hooks/useFirebase'
-
-const API_KEY = "AIzaSyBnlosOl8gQRozpoQqgJwVYKY5bVOCMPJM"
-const signUpURL = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${API_KEY}`
-const signInURL = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${API_KEY}`
+import { ReactComponent as FacebookIcon } from '../../assets/svg/facebook.svg';
+import { ReactComponent as GoogleIcon } from '../../assets/svg/google.svg';
+import { ReactComponent as GithubIcon } from '../../assets/svg/github.svg';
+import { ReactComponent as TwitterIcon } from '../../assets/svg/twitter.svg';
 
 const inputStyle = "p-3 pl-6 w-full rounded-full outline-none bg-opacity-25 bg-white text-gray-100 placeholder-gray-400"
 
 const Authentication = (props) => {
-    // const firebaseApp = useFirebase();
     const [isSignUp, setIsSignUp] = useState(props.isSignUp ? props.isSignUp : true);
     const [isLoading, setIsLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
@@ -36,7 +34,7 @@ const Authentication = (props) => {
             if (!username.value.trim()) return "Username cannot be empty";
         }
         if (!email.value.trim()) return "Email cannot be empty";
-        if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email.value)) return "Email is invalid";
+        if (!/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email.value)) return "Email is invalid";
         if (!password.value) return "Password cannot be empty";
         console.log(password.value.length)
         if (password.value.length < 8) return "Password is too short";
@@ -73,8 +71,8 @@ const Authentication = (props) => {
     }
 
     return (
-        <div className="flex justify-center w-full h-screen text-gray-200 bg-gradient-to-br from-emerald-900 to-cyan-900">
-            <form className="flex flex-col space-y-4 w-96 mt-32" onSubmit={submitHandler}>
+        <div className="flex flex-col items-center w-full h-screen text-gray-200 bg-gradient-to-br from-emerald-900 to-cyan-900">
+            <form className="flex flex-col space-y-4 w-96 mt-28" onSubmit={submitHandler}>
                 <h1 className="text-center text-3xl font-semibold my-4">{isSignUp ? "Don't have an account?" : "Have an Account?"}</h1>
                 {isSignUp &&
                     <>
@@ -90,12 +88,15 @@ const Authentication = (props) => {
 
                 {<span className="h-5 pl-6 text-sm text-red-600" >{errorMessage}</span>}
                 <Button className={"w-36 mx-auto font-semibold text-white bg-green-500 hover:bg-green-600 active:bg-green-500"} type={"submit"} content={isLoading ? <Loader className="mx-auto w-5 animate-spin" /> : isSignUp ? "SIGN UP" : "SIGN IN"} />
-                {isSignUp && <a href='./login' className="text-sm cursor-pointer">Forgot Password?</a>}
-                <span>{isSignUp ? "Don't have an account?" : "Already have an account?"} <span className='cursor-pointer font-bold text-green-400 hover:underline' onClick={toggleForm}>{isSignUp ? "Sign In" : "Sign Up"}</span></span>
+                {/* {isSignUp && <a href='./login' className="text-sm cursor-pointer">Forgot Password?</a>} */}
+                <span className='text-center'>{isSignUp ? "Don't have an account?" : "Already have an account?"} <span className='cursor-pointer font-bold text-green-400 hover:underline' onClick={toggleForm}>{isSignUp ? "Sign In" : "Sign Up"}</span></span>
             </form>
-            <button onClick={() => authCtx.login('GOOGLE')}>Google</button>
-            <button onClick={() => authCtx.login('GITHUB')}>GitHub</button>
-            <button onClick={() => authCtx.login('TWITTER')}>Twitter</button>
+            <div className='flex items-center my-3 space-x-8'>
+                <button onClick={() => authCtx.login('GOOGLE')}><GoogleIcon className='w-12' /></button>
+                <button onClick={() => authCtx.login('GITHUB')}><GithubIcon className='w-12' /></button>
+                <button onClick={() => authCtx.login('TWITTER')}><TwitterIcon className='w-14 h-14' /></button>
+                <button onClick={() => { }} ><FacebookIcon /></button>
+            </div>
         </div >
     )
 }

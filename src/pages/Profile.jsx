@@ -15,10 +15,10 @@ const Profile = () => {
                 <h1 className='text-2xl font-semibold my-2'>About</h1>
                 <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestias maiores eum ipsum harum aperiam rem earum ad similique hic, quam reiciendis amet? Eveniet sit tenetur laborum rem quaerat quis delectus.</p>
             </div>
-            {/* <div className=''>
+            <div className=''>
                 <h1 className='text-2xl font-semibold my-2'>Joined teams</h1>
                 <div>No teams joined</div>
-            </div> */}
+            </div>
         </div>
     )
 }

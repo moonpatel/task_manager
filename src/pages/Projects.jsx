@@ -9,7 +9,6 @@ const Projects = () => {
                     <h1 className="my-auto text-2xl font-semibold">Projects</h1>
                     <h2 className="my-auto text-lg text-gray-800">This Week</h2>
                 </div>
-
                 <TaskSection />
             </main>
         </div>

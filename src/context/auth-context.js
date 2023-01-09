@@ -83,7 +83,8 @@ export const AuthContextProvider = (props) => {
             } else {
                 // the user already exists, get users data
                 console.log("User already exists");
-                u = querySS.docs[0].data;
+                console.log(querySS.docs[0].data());
+                u = querySS.docs[0].data();
             }
         } catch (err) {
             console.log(err);
