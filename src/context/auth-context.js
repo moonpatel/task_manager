@@ -96,13 +96,25 @@ export const AuthContextProvider = (props) => {
     };
 
     const signup = async (data) => {
+        let u = null;
         await setPersistence(auth, browserLocalPersistence);
-        let userCredentials = await createUserWithEmailAndPassword(auth, data.email, data.password);
-        let user = { displayName: userCredentials.user.displayName, email: userCredentials.user.email };
+        try {
+            let result = await createUserWithEmailAndPassword(auth, data.email, data.password); // create account for user
+            const { displayName, email, uid } = result.user;
+            let u = { displayName, email, uid };
 
-        setUser(user);
+            const usersRef = collection(db, "users"); // reference to 'users' collection
+            // create user document if user does not exists
+            const docRef = await addDoc(usersRef, u);
+            console.log("Document created with reference", docRef.id);
+        } catch (err) {
+            console.log(err);
+            return;
+        }
+
+        setUser(u);
         setIsLoggedIn(true);
-        localStorage.setItem("user", JSON.stringify(user));
+        localStorage.setItem("user", JSON.stringify(u));
         localStorage.setItem("isLoggedIn", true);
     };
 
