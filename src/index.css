@@ -10,9 +10,15 @@
         @apply bg-gradient-to-br from-emerald-600 to-cyan-900;
     }
     .gradient-3 {
-        @apply bg-gradient-to-br from-emerald-400 to-cyan-700
+        @apply bg-gradient-to-br from-emerald-400 to-cyan-700;
     }
     .gradient-4 {
-        @apply bg-gradient-to-br from-emerald-200 to-cyan-500
+        @apply bg-gradient-to-br from-emerald-200 to-cyan-500;
+    }
+    .btn {
+        @apply p-2 px-3 rounded-lg text-white bg-dark-primary-800 dark:text-dark-background dark:bg-dark-primary-900;
+    }
+    .btn-danger {
+        @apply text-white bg-red-600 dark:text-dark-on-error dark:bg-dark-error;
     }
 }

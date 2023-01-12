@@ -24,7 +24,7 @@ function App() {
                 <Route path="/" element={<Layout content={<Projects />} />} />
                 <Route path="/home" element={<Layout content={<Home />} />} />
                 <Route path="/stats" element={<Layout content={<Stats />} />} />
-                <Route path="/projects" element={<Layout content={<Projects />} />} />
+                <Route path="/projects/*" element={<Layout content={<Projects />} />} />
                 <Route path="/chat" element={<Layout content={<Chats />} />} />
                 <Route path="/calendar" element={<Layout content={<Calendar />} />} />
                 <Route path="/settings" element={<Layout content={<Settings />} />} />

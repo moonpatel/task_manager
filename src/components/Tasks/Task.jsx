@@ -13,7 +13,7 @@ const Task = ({ title, body, keyVal, editTask, deleteTask }) => {
         deleteTask(keyVal);
     }
     return (
-        <div className="p-5 bg-[#fefffe] rounded-2xl shadow-lg shadow-gray-100 dark:bg-dark-background dark:shadow-none">
+        <div className="p-5 bg-[#fefffe] rounded-2xl shadow-md dark:bg-dark-background dark:shadow-none">
             <div className="flex justify-between mb-3">
                 <h1 className="text-xl font-semibold dark:text-dark-on-background/75">{title}</h1>
                 <div className='flex space-x-2'>
