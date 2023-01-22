@@ -22,7 +22,7 @@ const Projects = () => {
     const { app, user } = useContext(AuthContext);
 
     const onProjectChangeHandler = (event) => {
-        setProjectName(event.target.value)
+        setProjectName(event.target.value);
     }
     const createProject = async (event) => {
         console.log(projects)
@@ -52,9 +52,9 @@ const Projects = () => {
             </div>
             <div className='flex flex-wrap gap-6'>
                 <Routes>
-                    <Route path='' element={<Fragment>{projects && projects.map(elem => <Project key={elem.pid} project={elem} />)}
-                        <div className='p-3 w-32 rounded-lg flex items-center text-white bg-dark-background dark:bg-dark-bg-2 mr-4 cursor-pointer' onClick={() => setShowForm(true)}>
-                            <PlusIcon className='w-6 m-auto' />
+                    <Route path='*' element={<Fragment>{projects && projects.map(elem => <Project key={elem.pid} project={elem} />)}
+                        <div className='p-3 w-44 rounded-lg flex items-center text-white bg-dark-background dark:bg-dark-bg-2 mr-4 cursor-pointer' onClick={() => setShowForm(true)}>
+                            <PlusIcon className='w-10 m-auto' />
                         </div>
                     </Fragment>} />
                     <Route path={":projectID"} element={<TaskSection />} />

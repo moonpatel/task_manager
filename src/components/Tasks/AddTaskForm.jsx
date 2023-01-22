@@ -16,7 +16,7 @@ const AddTaskForm = (props) => {
     const addTaskHandler = (event) => {
         event.preventDefault();
         const task = {
-            title, body: details
+            title, details
         }
         props.addTask(task);
         props.cancel();
