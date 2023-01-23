@@ -10,22 +10,30 @@ import AuthContext from '../context/auth-context'
 const db = getFirestore();
 
 const Projects = () => {
-    useEffect(() => {
-        const q = query(collection(db, "projects"), where("head", "==", user.displayName));  // get all projects of current user
-        getDocs(q).then(querySS => {
-            setProjects(querySS.docs.map(doc => { let newDoc = doc.data(); newDoc.pid = doc.id; return newDoc; }));
-        });
-    }, []);
     const [showForm, setShowForm] = useState(false)
     const [projects, setProjects] = useState([]);
     const [projectName, setProjectName] = useState("");
     const { app, user } = useContext(AuthContext);
 
+    useEffect(() => {
+        if (!(localStorage.getItem('projects') == 'undefined') && !localStorage.getItem('projects')) {
+            // Schema of project document.
+            // project: head(owner name),name(project name),tasks(tasks in the project)
+            const q = query(collection(db, "projects"), where("head", "==", user.displayName));  // get all projects of current user
+            getDocs(q).then(querySS => {
+                let fetchedProjects = querySS.docs.map(doc => { let newDoc = doc.data(); newDoc.pid = doc.id; return newDoc; })
+                setProjects([...fetchedProjects]);
+                localStorage.setItem('projects', JSON.stringify(fetchedProjects));
+            });
+        } else {
+            setProjects([...JSON.parse(localStorage.getItem('projects'))]);
+        }
+    }, []);
+
     const onProjectChangeHandler = (event) => {
-        setProjectName(event.target.value)
+        setProjectName(event.target.value);
     }
     const createProject = async (event) => {
-        console.log(projects)
         event.preventDefault();
         const q = query(collection(db, "projects"), where("name", "==", projectName));
         const querySS = await getDocs(q);
@@ -37,6 +45,9 @@ const Projects = () => {
             projectObj.pid = docRef.id;
             console.log('ProjectObj: ', projectObj)
             setProjects(prev => [...prev, projectObj]);     // AVOID MUTATION OF ARRAY IN A STATE AT ALL COSTS. USE SPREADING(...arr) OR concat()
+            let localProjects = [...JSON.parse(localStorage.getItem('projects'))];
+            localProjects.push(projectObj);
+            localStorage.setItem('projects', JSON.stringify(localProjects));
             setShowForm(false);
         }
         else {
@@ -52,9 +63,9 @@ const Projects = () => {
             </div>
             <div className='flex flex-wrap gap-6'>
                 <Routes>
-                    <Route path='' element={<Fragment>{projects && projects.map(elem => <Project key={elem.pid} project={elem} />)}
-                        <div className='p-3 w-32 rounded-lg flex items-center text-white bg-dark-background dark:bg-dark-bg-2 mr-4 cursor-pointer' onClick={() => setShowForm(true)}>
-                            <PlusIcon className='w-6 m-auto' />
+                    <Route path='*' element={<Fragment>{projects && projects.map(elem => <Project key={elem.pid} project={elem} />)}
+                        <div className='p-3 w-44 rounded-lg flex items-center text-white bg-dark-background dark:bg-dark-bg-2 mr-4 cursor-pointer' onClick={() => setShowForm(true)}>
+                            <PlusIcon className='w-10 m-auto' />
                         </div>
                     </Fragment>} />
                     <Route path={":projectID"} element={<TaskSection />} />

@@ -21,7 +21,7 @@ function App() {
     if (authCtx.isLoggedIn)
         return (
             <Routes>
-                <Route path="/" element={<Layout content={<Projects />} />} />
+                <Route path="*" element={<Layout content={<Projects />} />} />
                 <Route path="/home" element={<Layout content={<Home />} />} />
                 <Route path="/stats" element={<Layout content={<Stats />} />} />
                 <Route path="/projects/*" element={<Layout content={<Projects />} />} />
