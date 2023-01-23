@@ -1,6 +1,7 @@
 import { getDoc, getFirestore, doc } from 'firebase/firestore'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import { fetchTasks } from '../../utilities/tasks/tasks';
 import TaskGroup from './TaskGroup'
 const db = getFirestore();
 
@@ -46,37 +47,7 @@ const TaskSection = () => {
     const [completed, setCompleted] = useState([]);
 
     useEffect(() => {
-        if (!(localStorage.getItem(pid) == 'undefined') && !localStorage.getItem(pid)) {
-            async function fetchTasks() {
-                const project = await getDoc(doc(db, 'projects', pid));
-                let data = project.data().tasks;
-                let allTasks = [];
-                for (let taskid of data) {
-                    let task = await getDoc(doc(db, 'tasks', taskid));
-                    allTasks.push(task.data());
-                }
-
-                localStorage.setItem(pid, JSON.stringify([...allTasks]));
-
-                let todoTasks = allTasks.filter(elem => elem.type == 'TO_DO');
-                let inProgressTasks = allTasks.filter(elem => elem.type == 'IN_PROGRESS');
-                let completedTasks = allTasks.filter(elem => elem.type == 'COMPLETED');
-
-                setTodo([...todoTasks]);
-                setInProgress([...inProgressTasks]);
-                setCompleted([...completedTasks]);
-            }
-            fetchTasks();
-        } else {
-            let allLocalTasks = [...JSON.parse(localStorage.getItem(pid))];
-            let todoTasks = allLocalTasks.filter(elem => elem.type == 'TO_DO');
-            let inProgressTasks = allLocalTasks.filter(elem => elem.type == 'IN_PROGRESS');
-            let completedTasks = allLocalTasks.filter(elem => elem.type == 'COMPLETED');
-
-            setTodo([...todoTasks]);
-            setInProgress([...inProgressTasks]);
-            setCompleted([...completedTasks]);
-        }
+        fetchTasks(pid, setTodo, setInProgress, setCompleted);
     }, []);
 
     return (
@@ -84,9 +55,6 @@ const TaskSection = () => {
             <TaskGroup pid={pid} title="To Do" tasks={todo} />
             <TaskGroup pid={pid} title="In Progress" tasks={inProgress} />
             <TaskGroup pid={pid} title="Completed" tasks={completed} />
-            {/* {allTasks.map((taskgrp, index) => {
-                return <TaskGroup key={index} title={taskgrp.title} tasks={taskgrp.tasks} />
-            })} */}
         </section>
     )
 }
